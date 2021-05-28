@@ -22,7 +22,6 @@ public class ControllerMain {
     private TicketAutomate ticketAutomate = new TicketAutomate();
     private String typeOfTicket;
     private LocalDate locDate;
-    private double price;
     private boolean card = false;
 
 
@@ -37,9 +36,8 @@ public class ControllerMain {
     void buyTheTicket(MouseEvent event) throws IOException {
         typeOfTicket = String.valueOf(typeOfTickets.getValue());
         locDate = LocalDate.now();
-        price = ticketAutomate.getPrice(typeOfTicket);
         double inputCash = cash.getCash();
-        ticketAutomate.transaction(card, price, dialog, inputCash, typeOfTicket, locDate,infoFeld);
+        ticketAutomate.transaction(card, dialog, inputCash, typeOfTicket, locDate,infoFeld);
     }
     @FXML
     void count100Euro(MouseEvent event) {

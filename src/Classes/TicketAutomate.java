@@ -47,24 +47,25 @@ public class TicketAutomate {
         return ticketPrice;
     }
 
-    public void transaction(boolean card, double price, AnchorPane dialog, double inCash, String typeOfTicket, LocalDate locDate, TextArea infoFeld) throws IOException {
+    public void transaction(boolean card, AnchorPane dialog, double inCash, String typeOfTicket, LocalDate locDate, TextArea infoFeld) throws IOException {
+        ticketPrice = getPrice(typeOfTicket);
         double inputCash;
         if(card){
-            inputCash = price;
+            inputCash = ticketPrice;
             dialog.setVisible(true);
             card=false;
         }else{
             inputCash = inCash;
         }
-        if(price!=0 && inputCash>=price){
+        if(ticketPrice!=0 && inputCash>=ticketPrice){
             String ticket = "###################################################### \r\n # You bought : " + typeOfTicket + ". \r\n # On: " +
                     locDate.format(formatter) + ".\r\n # You payed: " + df.format(inputCash)
-                    + ".\r\n # Money back: " + df.format(inputCash - price) + "\r\n ######################################################";
+                    + ".\r\n # Money back: " + df.format(inputCash - ticketPrice) + "\r\n ######################################################";
             infoFeld.setText(ticket);
             new TicketWriter(ticket);
             DatabaseHandler databaseHandler = new DatabaseHandler();
             Date date = Date.valueOf(locDate);
-            databaseHandler.addTicketToDB(typeOfTicket, price, date);
+            databaseHandler.addTicketToDB(typeOfTicket, ticketPrice, date);
         } else infoFeld.setText("You didnt choose the ticket or entered not enough money. \n You entered: " + inputCash + ". \n Try again");
     }
 }

@@ -8,6 +8,7 @@ import java.util.HashMap;
 public class Tickets {
  private static double ticketPrice;
  private static HashMap<String, Double> ticketsTypes = new HashMap<String, Double>();
+ public static ObservableList<String> ticketsType = FXCollections.observableArrayList();
  public Tickets() {
   ticketsTypes.put("Zone M ", 3.40 );
   ticketsTypes.put("Zone M - 1 ", 5.10 );
@@ -18,7 +19,6 @@ public class Tickets {
   ticketsTypes.put("Zone M - 6 ", 13.60 );
  }
 
- public static ObservableList<String> ticketsType = FXCollections.observableArrayList();
  public static ObservableList<String> givePossibleTickets() {
   for (String i : ticketsTypes.keySet()) {
    ticketsType.add("Ticket " + i + " price: " + ticketsTypes.get(i) + " € ");
